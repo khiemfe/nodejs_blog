@@ -5,10 +5,20 @@ const morgan = require('morgan')
 const app = express()
 const port = 3000
 
+const route = require('./routes')
+
+//dùng để cấu hình middleware static cho ứng dụng Express (SCSS)
 app.use(express.static(path.join(__dirname, 'public')))
 
+//middleware (có cài này thì req.body ở post mới in ra được (còn req.query thì không cần))
+app.use(express.urlencoded({
+    extended: true
+})) // xử lí submit form
+app.use(express.json()) // submit html, hoặc sử dụng các thư viện:
+                        // XMLHttpRequest, fetch, axios, ajax...
+
 //HTTP logger
-app.use(morgan('combined')) 
+// app.use(morgan('combined')) 
 
 //Template engine
 app.engine('hbs', handlebars.engine({
@@ -19,22 +29,13 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 console.log("PATH",__dirname) //chỉ tới thư mục chứa view (tới src)
 
-app.get('/', (req, res) => {
-  res.render('home');
-});
 
-app.get('/news', (req, res) => {
-  res.render('news');
-});
-
-//route
-app.get('/trang-chu', (req, res) => {
-    res.send('Hello World!')
-})
- 
+// routes init
+route(app)
+  
 //127.0.0.1 -> localhost
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}/trang-chu`)
+  console.log(`Example app listening at http://localhost:${port}`)
 })
 
 //nodemon (npm i nodemon  --save-dev)  
