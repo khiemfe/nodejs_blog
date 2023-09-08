@@ -6,6 +6,10 @@ const app = express();
 const port = 3000;
 
 const route = require('./routes');
+const db = require('./config/db');
+
+// Connect to DB
+db.connect();
 
 //dùng để cấu hình middleware static cho ứng dụng Express (SCSS)
 app.use(express.static(path.join(__dirname, 'public')));
