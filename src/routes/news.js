@@ -1,15 +1,15 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-const newsController = require('../app/controllers/NewController')
+const newsController = require('../app/controllers/NewController');
 // newsController.index
-console.log(newsController.index)
+console.log(newsController.index);
 
-router.use('/:slug', newsController.show)
+router.use('/:slug', newsController.show);
 
-// luôn để mặc định ở dưới cùng 
-router.use('/', newsController.index) /* = app.get('/', (req, res) => {
+// luôn để mặc định ở dưới cùng
+router.use('/', newsController.index); /* = app.get('/', (req, res) => {
                                                 res.render('home');
                                             });*/
 
-module.exports = router 
+module.exports = router;

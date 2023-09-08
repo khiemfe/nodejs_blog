@@ -1,5 +1,5 @@
-
-class SiteController { //function contructor
+class SiteController {
+    //function contructor
 
     //[GET] / (home)
     index(req, res) {
@@ -10,9 +10,9 @@ class SiteController { //function contructor
     search(req, res) {
         res.render('search');
     }
-}  
+}
 
-module.exports = new SiteController
+module.exports = new SiteController();
 
-// exports cái gì thì khi require nhận được cái đó 
+// exports cái gì thì khi require nhận được cái đó
 // const newController = require('./NewsController')
