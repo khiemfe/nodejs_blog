@@ -24,7 +24,7 @@ app.use(express.json()); // submit html, hoặc sử dụng các thư viện:
 
 //Template engine
 app.engine(
-  'hbs',
+    'hbs',
     handlebars.engine({
         extname: '.hbs', //đổi từ handlebars thành hbs cho ngắn (đổi cả đuôi .handlebars)
     }),
