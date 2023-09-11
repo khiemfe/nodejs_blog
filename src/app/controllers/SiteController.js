@@ -1,12 +1,13 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 const Course = require('../models/Course');
+const { mutipleMongooseToObject } = require('../../ulti/mongoose');
 
 class SiteController {
     //function contructor
 
     //[GET] / (home)
-    index(req, res) {
+    index(req, res, next) {
         // Callback
 
         // Old (Cũ)
@@ -16,9 +17,17 @@ class SiteController {
         // })
 
         (async () => {
-            const courses = await Course.find();
-            if (courses.error) res.status(400).json({ error: 'ERROR!!!' });
-            else res.json(courses);
+            let courses = await Course.find();
+            if (courses.error) {
+                next(courses.error);
+                // res.status(400).json({ error: 'ERROR!!!' })
+            } else {
+                // res.json(courses)
+                // courses = courses.map(course => course.toObject()) //chuyển courses từ obj property thành obj bình thường(để qua lớp bảo mật)
+                res.render('home', {
+                    courses: mutipleMongooseToObject(courses),
+                });
+            }
         })();
 
         //or try/catch
@@ -34,9 +43,10 @@ class SiteController {
         //     .then((courses) => {
         //         return res.json(courses)
         //     })
-        //     .catch(() => {
-        //         return res.starus(400).json({ error: 'ERROR!'})
-        //     })
+        ////   .catch(() => {
+        ////        return res.starus(400).json({ error: 'ERROR!'})
+        ////   })
+        //     .catch(next)
         // })()
 
         // res.render('home');

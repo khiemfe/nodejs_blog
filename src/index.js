@@ -2,6 +2,7 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const path = require('path');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
@@ -23,6 +24,8 @@ app.use(
 app.use(express.json()); // submit html, hoặc sử dụng các thư viện:
 // XMLHttpRequest, fetch, axios, ajax...
 
+app.use(methodOverride('_method')); // dùng để sử dụng phương phức mà mình muốn (PUT,...)
+
 //HTTP logger
 // app.use(morgan('combined'))
 
@@ -31,11 +34,14 @@ app.engine(
     'hbs',
     handlebars.engine({
         extname: '.hbs', //đổi từ handlebars thành hbs cho ngắn (đổi cả đuôi .handlebars)
+        helpers: {
+            sum: (a, b) => a + b,
+        },
     }),
 );
 app.set('view engine', 'hbs');
 // app.set('views', './views');
-app.set('views', path.join(__dirname, 'resources/views'));
+app.set('views', path.join(__dirname, 'resources', 'views')); //'resources', 'views' or 'resources/views'
 console.log('PATH', __dirname); //chỉ tới thư mục chứa view (tới src)
 
 // routes init
@@ -43,7 +49,7 @@ route(app);
 
 //127.0.0.1 -> localhost
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+    console.log(`App listening at http://localhost:${port}`);
 });
 
 //nodemon (npm i nodemon  --save-dev)

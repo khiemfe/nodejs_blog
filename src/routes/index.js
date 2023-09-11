@@ -1,6 +1,8 @@
 //nạp vào
 const newRouter = require('./news');
+const meRouter = require('./me');
 const siteRouter = require('./site');
+const coursesRouter = require('./courses');
 
 function route(app) {
     // app.get('/news', (req, res) => {
@@ -8,6 +10,8 @@ function route(app) {
     //     res.render('news');
     // }); ==
     app.use('/news', newRouter);
+    app.use('/me', meRouter);
+    app.use('/courses', coursesRouter);
 
     // app.get('/search', (req, res) => {
     //     // console.log(req.query) //get là query parameters nên là req.query

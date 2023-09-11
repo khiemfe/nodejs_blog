@@ -8,7 +8,7 @@ class NewsController {
 
     //[GET] /news/:slug (detail)
     show(req, res) {
-            res.send('NEW DETAIL!!!');
+        res.send('NEW DETAIL!!!');
     }
 }
 

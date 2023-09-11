@@ -10,3 +10,5 @@ async function connect() {
 }
 
 module.exports = { connect };
+
+// useCreateIndex = true (fix slug unique)

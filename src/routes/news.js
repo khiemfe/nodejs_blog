@@ -5,10 +5,10 @@ const newsController = require('../app/controllers/NewController');
 // newsController.index
 console.log(newsController.index);
 
-router.use('/:slug', newsController.show);
+router.get('/:slug', newsController.show);
 
 // luôn để mặc định ở dưới cùng
-router.use('/', newsController.index); /* = app.get('/', (req, res) => {
+router.get('/', newsController.index); /* = app.get('/', (req, res) => {
                                                 res.render('home');
                                             });*/
 
